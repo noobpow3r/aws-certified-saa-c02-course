@@ -25,3 +25,44 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 
 - How many **subnets** will you need?
 - How many **IPs total**? How many **per subnet**?
+
+### Custom VPC
+
+- Regional Service - All AZs in the region
+- Isolated network
+- Nothing **IN** or **OUT** without explicit configuration
+- Flexible configuration - simple or multi-tier
+- Hybrid Networking - other cloud & on-premises
+- **Default** or **Dedicated Tenancy!**
+- IPv4 Private CIDR Blocks & Public IPs
+- 1 Primary Private IPv4 CIDR Block
+- ...Min **/28** (16 IP) Max **/16** (65536 IP)
+- Optional secondary IPv4 Blocks
+- Optional single **assigned** IPv6 **/56** CIDR Block
+
+### DNS in a VPC
+
+- Provided by R53
+- VPC **Base IP +2** Address, for example if the VPC IP is 10.0.0.0 then the DNS IP will be 10.0.0.2
+- **enableDNSHostnames** - gives instances DNS Names
+- **enableDNSSupport** - enables DNS resolution in VPC
+
+### VPC Subnets
+
+- **AZ Resilient**
+- A subnetwork of a VPC - **within a particular AZ**
+- 1 Subnet => 1 AZ, 1 AZ => 0+ Subnets
+- IPv4 CIDR is a subset of the VPC CIDR
+- Cannot overlap with other subnets
+- Optional IPv6 CIDR (/64 subset of the /56 VPC - space for 256)
+- Subnets can communicate with other subnets in the VPC
+
+### Subnet IP Addressing
+
+- Reserved IP addresses (5 in total)
+- For example: 10.16.16.0/20 (10.16.16.0 => 10.16.31.255)
+- **Network** Address (10.16.16.0)
+- **Network +1** (10.16.16.1) - VPC Router
+- **Network +2** (10.16.16.2) - Reserved (DNS*)
+- **Network +3** (10.16.16.3) - Reserved Future Use
+- **Broadcast** Address 10.16.31.255 (Last IP in subnet)

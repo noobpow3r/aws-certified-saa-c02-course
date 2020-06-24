@@ -23,6 +23,7 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 | Large       | /18     | /21         | 2043         | 8           | 16344     |
 | Extra Large | /16     | /20         | 4091         | 16          | 65456     |
 
+- Subnet Calculator : https://www.site24x7.com/tools/ipv4-subnetcalculator.html
 - How many **subnets** will you need?
 - How many **IPs total**? How many **per subnet**?
 

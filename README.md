@@ -67,3 +67,36 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Network +2** (10.16.16.2) - Reserved (DNS*)
 - **Network +3** (10.16.16.3) - Reserved Future Use
 - **Broadcast** Address 10.16.31.255 (Last IP in subnet)
+
+### VPC Router
+
+- Every VPC has a VPC Router - Highly available
+- In every subnet .. **network +1** address
+- Routes traffic between subnets
+- Controlled by **route tables** each subnet has one
+- A VPC has a **Main** route table - subnet default
+
+### Internet Gateway (IGW)
+
+- **Region resilient** gateway attached to a VPC
+- 1 VPC = 0 or 1 IGW, 1 IGW = 0 or 1 VPC
+- Runs from within the AWS Public Zone
+- Gateways traffic between the VPC and the Internet or AWS Public Zone (S3..SQS..SNS..etc)
+- Managed - AWS handles performance
+
+### Using an IGW
+
+1. Create IGW
+2. Attach IGW to VPC
+3. Create custom RT
+4. Associate RT
+5. Default Routes => IGW
+6. Subnet allocate IPv4
+
+### Bastion Host / Jumpbox
+
+- Bastion Host = Jumpbox
+- An instance in a public subnet
+- Incoming management connections arrive there
+- Then access internal VPC resources
+- Often the only way IN to a VPC

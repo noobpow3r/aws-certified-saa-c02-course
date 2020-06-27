@@ -100,3 +100,44 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Incoming management connections arrive there
 - Then access internal VPC resources
 - Often the only way IN to a VPC
+
+### Network Access Control List (NACL)
+
+- **Stateless** - INITIATION and RESPONSE seen as different
+- **Only** impacts data **crossing subnet border**
+- Can **EXPLICITLY ALLOW** and **DENY**
+- IPs/Networks, Ports & Protocols - **no logical resources**
+- NACLs cannot be assigned TO AWS resources.. only subnets
+- Use WITH **Security Groups** to add explicit **DENY** (Bad IPs/Nets)
+- One subnet = One NACL at a time
+
+### Security Groups (SG)
+
+- **Stateful** - TRAFFIC and RESPONSE = **Same Rule**
+- **Security Groups** can filter based on **AWS Logical resources**...
+- ... Resources, other Security Groups and even themselves
+- Implicit Deny and Explicit Allow
+- .. **NO EXPLICIT DENY**
+
+### SGs vs NACL
+
+- NACLs on subnet for any products which don't work with SG's e.g. NAT Gateways
+- NACLs when adding explicit DENY (bad IP's, bad actors)
+- SG as the default **almost everywhere**
+
+### What is NAT?
+
+- Network Address Translation (**NAT**)
+- A set of processes - remapping SRC or DST IPs
+- **IP masquerading** - hiding CIDR Blocks behind one IP
+- Private IPv4 Addresses running out
+- Gives Private CIDR range **outgoing** internet access
+
+### NAT Gateways
+
+- Runs from a **public subnet**
+- Uses **Elastic IPs** (Static IPv4 Public)
+- **AZ resilient Service** (HA in that AZ)
+- For region resilience - **NATGW in each AZ ...**
+- .. RT in for each AZ with that NATGW as target
+- Managed, scales to 45 Gbps, $ Duration & Data Volume

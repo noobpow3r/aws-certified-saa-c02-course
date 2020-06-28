@@ -141,3 +141,28 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - For region resilience - **NATGW in each AZ ...**
 - .. RT in for each AZ with that NATGW as target
 - Managed, scales to 45 Gbps, $ Duration & Data Volume
+
+### NAT Instance vs NAT Gateway
+
+| Attribute | NAT gateway | NAT instance |
+| --------- | ----------- | ------------ |
+| Availability | Highly available. NAT gateways in each Availability Zone are implemented with redundancy. Create a NAT gateway in each Availability Zone to ensure zone-independent architecture.| Use a script to manage failover between instances.|
+| Bandwidth | Can scale up to 45 Gbps. | Depends on the bandwidth of the instance type |
+| Maintenance | Managed by AWS. You do not need to perform any maintenance. | Managed by you, for example, by installing software updates or operating system patches on the instance. |
+| Performance | Software is optimized for handling NAT traffic. | A generic Amazon Linux AMI that's configured to perform NAT. |
+| Cost | Charged depending on the number of NAT gateways you use, duration of usage, and amount of data you send through the NAT gateways. | Charged depending on the number of NAT instances that you use, duration of usage, and instance type and size. |
+| Type and size | Uniform offering; you don't need to decide on the type or size. | Choose a suitable instance type and size, according to your predicted workload. | 
+| Security groups | Cannot be associated with a NAT gateway. You can associate security groups with your resources behind the NAT gateway to control inbound and outbound traffic. | Associate with your NAT instance and the resources behind your NAT instance to control inbound and outbound traffic. | 
+| Network ACLs | Use a network ACL to control the traffic to and from the subnet in which your NAT gateway resides. | Use a network ACL to control the traffic to and from the subnet in which your NAT instance resides. | 
+| Flow logs | Use flow logs to capture the traffic. | Use flow logs to capture the traffic. | 
+| Port forwarding | Not supported. | Manually customize the configuration to support port forwarding. | 
+| Bastion servers | Not supported. | Use as a bastion server. |
+
+### What about IPv6?
+
+- NAT isn't required for IPv6
+- All IPv6 addresses in AWS are publicly routable
+- The Internet Gateway works with ALL IPv6 IPs directly
+- NAT Gateways **don't work with IPv6**
+- ::/0 Route + IGW for bi-directional connectivity
+- ::/0 Route + Egress-Only Internet Gateway - Outbound Only

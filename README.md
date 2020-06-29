@@ -166,3 +166,50 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - NAT Gateways **don't work with IPv6**
 - ::/0 Route + IGW for bi-directional connectivity
 - ::/0 Route + Egress-Only Internet Gateway - Outbound Only
+
+# Elastic Compute Cloud (EC2) Basics
+
+### EC2 Architecture
+
+- EC2 Instance are **virtual machines** (OS+Reseources)
+- EC2 Instances run on **EC2 Hosts**
+- **Shared** Hosts or **Dedicated** Hosts
+- **Hosts = 1 AZ** - AZ Fails, Host Fails, Instances Fail
+
+### What's EC2 Good for?
+
+- Traditional **OS+Application** Compute
+- **Long-Running** Compute
+- **Server** style applications ...
+- .. either **burst** or **steady-state** load
+- **Monolithic** application stacks
+- **Migrated** application workloads or **Disaster Recovery**
+
+### EC2 Instance Types
+
+- **Raw** CPU, Memory, Local Storage Capacity & Type
+- **Resource Ratios**
+- **Storage** and **Data** Network **Bandwidth**
+- System Architecture / Vendor
+- Additional Features and Capabilities
+
+### EC2 Categories
+
+- **General Purpose** - Default - Diverse workloads, equal resource ratio.
+- **Compute Optimized** - Media Processing, HPC, Scientific Modelling, gaming, Machine Learning.
+- **Memory Optimized** - Processing large in-memory datasets, some database workloads.
+- **Accelerated Computing** - Hardware GPU, field programmable gate arrays (FPGAs).
+- **Storage Optimized** - Sequential and Random IO - scale-out transactional databases, data warehousing, Elasticsearch, analytics workloads.
+
+### Key Terms Storage Refresher 
+
+- **Direct** (local) attached Storage - Storage on the EC2 Host
+- **Network** attached Storage - Volumes delivered over the network (EBS)
+- **Ephemeral** Storage - Temporary Storage
+- **Persistent** Storage - Permanent storage - lives on past the lifetime of the instance
+
+### Key Terms Storage Refresher - Part 2
+
+- **Block** Storage - **Volume** presented to the **OS** as a collection of blocks... no structure provided. **Mountable**. **Bootable**.
+- **File** Storage - Presented as a file share ... has structure. **Mountable**. **NOT Bootable**.
+- **Object** Storage - collection of objects, flat. **Not mountable**. **Not bootable**.

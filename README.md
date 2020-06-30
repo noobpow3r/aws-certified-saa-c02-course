@@ -213,3 +213,59 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Block** Storage - **Volume** presented to the **OS** as a collection of blocks... no structure provided. **Mountable**. **Bootable**.
 - **File** Storage - Presented as a file share ... has structure. **Mountable**. **NOT Bootable**.
 - **Object** Storage - collection of objects, flat. **Not mountable**. **Not bootable**.
+
+### EBS & Volume Types
+
+- Volumes created in an AZ, **isolated in that AZ**
+- AZ fails - Volume impacted.. **Snapshot help**
+- **Highly available and resilient in that AZ**
+- Generally one volume <-> 1 instance (..but multi-attach)
+- GB/month fee regardless of instance state...
+- EBS MAX 80k IOPS (**Instance**), 64k (**Vol**) (**io1)
+- ..MAX 2375 MB/s (**Instance**), 1000 MiB/s (**Vol**) (**io1)
+
+### Instance Store Volumes
+
+- Local on **EC2 Host**
+- **Block Storage** Devices
+- Physically connected to **one EC2 Host**
+- Instances **on that host** can access them
+- Lost on instance **move**, **resize** or **hardware failure**
+- Highest storage performance in AWS
+- You pay for it anyway - nncluded in instance price
+- **ATTACHED AT LAUNCH**
+- **TEMPORARY**
+
+### When to use EBS
+
+- **Highly Available** and **Reliable** storage
+- **Persist independently** from the EC2 Instance
+- Clusters - **Multi-Attach** feature of io1
+- Region Resilient **Backups**
+- Require up to **64000 IOPS** and **1000 MiB/s** per volume
+- Require up to **80000 IOPS** and **2375 MB/s** per instance
+
+### When to use Instance Store
+
+- **Value** - Included in instance cost
+- **More than 80000 IOPS & 2375 MB/s**
+- **Temp Storage** volumes
+- **Stateless** services
+- Rigid lifecycle link .. **storage <-> Instance**
+
+### EBS Snapshots
+
+- Snapshots are incremental volume copies to **S3*
+- The first is a **full copy** of 'data' on the volume
+- Future snaps are **incremental**
+- Volumes can be created (restored) from snapshots
+- Snapshots can be copied to another region
+
+### EBS Snapshots/Volume Performance
+
+- New EBS volume = **full performance immediately**
+- **Snaps restore lazily** - fetched gradually
+- Requested blocks are fetched immediately
+- Force a read of all data immediately ...
+- Fast Snapshot Restore (**FSR**) - Immediate restore
+- .. up to **50** snaps per region. Set on the **Snap & AZ**

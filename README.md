@@ -269,3 +269,35 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Force a read of all data immediately ...
 - Fast Snapshot Restore (**FSR**) - Immediate restore
 - .. up to **50** snaps per region. Set on the **Snap & AZ**
+
+### EBS Encryption
+
+- Accounts can be set to **encrypt by default** - default CMK
+- Otherwise choose a CMK to use.
+- Each volume uses **1 unique DEK**.
+- Snapshots & future volumes use the **same DEK**.
+- Can't change a volume to NOT be encrypted.
+- OS isn't aware of the encryption ... no performance loss.
+
+### EC2 Network & DNS Architecture
+
+- **Primary ENI (Elastic Network Interfaces)**
+  - Example: Mac Address - 00:0d:83:b1:c0:8e
+  - Primary IPv4 Private IP => 10.16.0.10 => ip-10-16-0-10.ec2.internal
+  - 0 or more secondary IPs
+  - 0 or 1 Public IPv4 Address => 3.89.7.136 => ec2-3-89-7-136.compute-1.amazonaws.com
+  - 1 elastic IP per private IPv4 address - Removes the Public IPv4 - Replaces with the Elastic IP
+  - 0 or more IPv6 addresses
+  - Security Groups
+  - Source/Destination Check
+- **Secondary ENI's**
+  - As above
+
+### EC2 Network & DNS Architecture
+
+- Secondary ENI + MAC = **Licensing**
+- Multi-homed (subnets) Management & Data
+- Different Security Groups - **multiple interfaces**
+- OS - **DOESN'T see public IPv4**
+- IPv4 Public IPs are **Dynamic** .. Stop & Start = **Change**
+- Public DNS = **private IP in VPC**, public IP everywhere else

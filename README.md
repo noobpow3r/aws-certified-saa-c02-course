@@ -221,8 +221,8 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Highly available and resilient in that AZ**
 - Generally one volume <-> 1 instance (..but multi-attach)
 - GB/month fee regardless of instance state...
-- EBS MAX 80k IOPS (**Instance**), 64k (**Vol**) (**io1)
-- ..MAX 2375 MB/s (**Instance**), 1000 MiB/s (**Vol**) (**io1)
+- EBS MAX 80k IOPS (**Instance**), 64k (**Vol**) (**io1**)
+- ..MAX 2375 MB/s (**Instance**), 1000 MiB/s (**Vol**) (**io1**)
 
 ### Instance Store Volumes
 
@@ -255,7 +255,7 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 
 ### EBS Snapshots
 
-- Snapshots are incremental volume copies to **S3*
+- Snapshots are incremental volume copies to **S3**
 - The first is a **full copy** of 'data' on the volume
 - Future snaps are **incremental**
 - Volumes can be created (restored) from snapshots
@@ -310,3 +310,65 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Regional** .. **unique ID e.g. ami-0a887e401f7654935
 - Permissions (Public, Your Account, Specific Accounts)
 - You can create an AMI from an EC2 instance you want to template
+
+### AMI Exam Tips
+
+- AMI = **One Region**, only works in that one region
+- **AMI Baking** .. creating an AMI from a configured instance + application
+- An AMI **can't be edited** .. launch instance, update configuration and make a new AMI
+- Can be copied **between regions** (includes its snapshots)
+- Remember permissions .. **default = your account**
+
+### Instance Pricing Models
+
+- On-Demand Instances
+- Spot Instances
+- Reserved Instances
+- Dedicated Hosts
+
+### On-Demand Instances
+
+- Instances have an **hourly rate**
+- Billed in **seconds** (**60s** minimum) or **Hourly**
+- **Default** Pricing Model
+- No **long-term** commitments or **upfront** payments
+- **New** or **uncertain** application requirements
+- **Short-term**, **spiky**, or **unpredictable** workloads which **can't tolerate any disruption**
+
+### Spot Instances
+
+- Spot pricing offers up to **90%** off vs On-Demand
+- A **spot price** is set by EC2 - based on **spare capacity**
+- You can specify a **maximum price** you'll pay
+- If spot price goes above yours - **instances terminate**
+- Applications that have flexible start and end times
+- Apps which only make sense at low cost
+- Apps which **can tolerate failure** and continue later
+
+### Reserved Instances
+
+- Up to 75% off vs On-demand - **for a commitment**
+- 1 or 3 years, All Upfront, Partial Upfront, No Upfront
+- Reserved in **region**, or **AZ** with capacity **reservation**
+- Scheduled Reservations
+- Known steady state usage
+- Lowest cost for apps which can't handle disruption
+- Need reserved capacity ..
+
+### Vertical Scaling
+
+- Each resize requires a reboot - **disruption**
+- Large instances often carry a **$ premium**
+- There is an upper cap on performance - **instance size**
+- **No application modification** required
+- Works for ALL applications - **even Monoliths**
+
+### Horizontal Scaling
+
+- Sessions, Sessions, Sessions
+- Requires application support OR **off-host sessions**
+- **No disruption** when scaling
+- **No real limits** to scaling
+- Often less expensive - **no large instance premium**
+- More granular ..
+

@@ -301,3 +301,12 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - OS - **DOESN'T see public IPv4**
 - IPv4 Public IPs are **Dynamic** .. Stop & Start = **Change**
 - Public DNS = **private IP in VPC**, public IP everywhere else
+
+### Amazon Machine Image (AMI)
+
+- AMI's can be used to **launch EC2** instance
+- **AWS** or **Community** Provided
+- Marketplace (can include **commercial software**)
+- **Regional** .. **unique ID e.g. ami-0a887e401f7654935
+- Permissions (Public, Your Account, Specific Accounts)
+- You can create an AMI from an EC2 instance you want to template

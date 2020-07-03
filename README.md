@@ -1,7 +1,15 @@
 # AWS Certified SAA-C02 Course
 Notes for Adrian Cantrill course https://learn.cantrill.io/
 
-# Virtual Private Cloud (VPC) Basics
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [Virtual Private Cloud Basics](#virtual-private-cloud-basics)
+  * [VPC Considerations](#vpc-considerations)
+  * [VPC Sizing](#vpc-sizing)
+  * [Custom VPC](#custom-vpc)
+
+# Virtual Private Cloud Basics
 
 ### VPC Considerations
 

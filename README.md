@@ -380,3 +380,29 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Often less expensive - **no large instance premium**
 - More granular ..
 
+# Containers & ECS
+
+### Container Key Concepts
+
+- **Dockerfiles** are used to **build images**
+- Portable - self-contained, always run as expected
+- Lightweight - Parent OS used, **fs layers are shared**
+- Container only runs the application & environment it needs
+- Provides much of the isolation VM's do
+- Ports are '**exposed**' to the host and beyond...
+- Application stacks can be multi-container ...
+
+### ECS Concepts
+
+- **Container Definition** - Image & Ports
+- **Task Definition** - Security (Task Role), Containers(s), Resources
+- **Task Role** - IAM Role which the TASK assumes
+- **Service** - How many copies, HA, Restarts
+
+### EC2 vs ECS (EC2) vs Fargate
+
+- If you use containers ... **ECS**
+- **Large** workload - **price** conscious - **EC2 Mode**
+- **Large** workload - **overhead** conscious - **Fargate**
+- **Small** / **Burst** workloads - **Fargate**
+- **Batch** / **Periodic** workloads - **Fargate**

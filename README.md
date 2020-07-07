@@ -406,3 +406,22 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Large** workload - **overhead** conscious - **Fargate**
 - **Small** / **Burst** workloads - **Fargate**
 - **Batch** / **Periodic** workloads - **Fargate**
+
+# Advanced EC2
+
+### EC2 Bootstrapping
+
+- Bootstrapping allows **EC2 Build Automation**
+- User Data - Accessed via the meta-data IP
+- **http://169.254.169.254/latest/user-data**
+- Anything in User Data is **executed** by the **instance OS**
+- **ONLY on Launch**
+- EC2 doesn't interpret, the OS needs to understand the User Data
+
+### User Data Key Points
+
+- It's **opaque** to EC2 .. its just a **block of data**
+- It's **NOT** secure - don't use it for passwords or long term credentials (ideally)
+- User data is limited to 16 KB in size
+- Can be modified when instance stopped
+- But **only executed once at launch**

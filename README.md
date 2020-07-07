@@ -425,3 +425,55 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - User data is limited to 16 KB in size
 - Can be modified when instance stopped
 - But **only executed once at launch**
+
+### EC2 Instance Role
+
+- Credentials are inside meta-data
+- iam/security-credentials/**role-name**
+- Automatically rotated - Always valid
+- Should always be used rather than adding access keys into instance
+- CLI tools will use ROLE credentials automatically
+
+### SSM Parameter Store
+
+- Storage for **configuration** & **secrets**
+- String, StringList & SecureString
+- License codes, Database Strings, Full Configs & Passwords
+- Hierarchies & Versioning
+- Plaintext and Ciphertext
+- Public Parameters - **Latest AMIs per region**
+
+### EC2 Placement Groups
+
+- **Cluster** - Pack instances close together
+- **Spread** - Keep instances separated
+- **Partition** - groups of intances spread apart
+
+### Cluster Placement Groups
+
+- Can't span AZs - **ONE AZ ONLY**
+- Can span VPC peers - but impacts performance
+- Requires a supported instance type
+- Use the same type of instance (**not mandatory**)
+- Launch at the same time (**not mandatory**)
+- **10 Gbps single stream performance**
+- Use cases: **Performance**, **fast speeds**, **low latency**
+
+### Spread Placement Groups
+
+- Provides infraestructure isolation - each **INSTANCE** run from a different rack
+- **7 Instances per AZ** (HARD LIMIT)
+- Not supported for Dedicated Instances or Hosts
+- Use Case: Small number of critical instances that need to be kept separated from each other
+
+### Partition Placement Groups
+
+- **7 Partitions per AZ**
+- Instances can be placed in **a specific partition**
+- ...or auto placed
+- Partition placement groups are not supported for Dedicated Hosts
+- Great for HDFS, HBase, and Cassandra
+
+### Links Placement Groups
+
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html

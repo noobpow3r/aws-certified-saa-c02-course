@@ -510,3 +510,31 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Most instances **support** and have **enabled by default**
 - Some support, but enabling costs extra
 
+# Route 53 - Global DNS
+
+### R53 Zone Concepts
+
+- A **R53 Hosted Zone** is a DNS DB for a domain e.g. animals4life.org
+- **Public** = Hosted on R53 provided **public DNS Servers**
+- **Globally resilient** (multiple DNS Servers)
+- Created with domain registration via R53 - can be created separately
+- Host **DNS Records** (e.g. A, AAAA, MX, NS, TXT ...)
+- Hosted Zones are what the DNS system references - **Authoritative** for a domain e.g. Animals4life.org
+
+### Health Check Concepts
+
+- Health check are **separate from**, but are **used by** records
+- Health checkers located **globally**
+- 10s or 30s
+- TCP, HTTP/HTTPS, HTTP/HTTPS with String Matching
+- **Healthy** or **Unhealthy**
+- Endpoint, CloudWatch Alarm, Checks of Checks (Calculated)
+
+### R53 Routing Policies
+
+- Simple
+- Failover
+- Weighted
+- Latency-based
+- Geolocation
+- Multi-value

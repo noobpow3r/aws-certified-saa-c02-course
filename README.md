@@ -538,3 +538,34 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Latency-based
 - Geolocation
 - Multi-value
+
+# Relational Database Service (RDS)
+
+### Relational (**SQL**) vs Non-Relational (**NoSQL**)
+
+- Structured Query Language (**SQL**)
+- Structure **in** & **between** tables of data - Rigid **Schema**
+- ... Relationships between tables
+- NoSQL - **Not one single thing --- different models**
+- Generally a much more relaxed Schema
+- Relationships handled differently
+
+### Why might you do it ...
+
+- Access to the DB Instance **OS**
+- **Advanced DB Option tuning** ... (DBROOT)
+- ... Vendor demands..
+- **DB or DB Version AWS don't provide..**
+- Specific **OS/DB Combination** AWS don't provide
+- Arquitecture AWS don't provide (replication/resilience)
+- Decision makers who '**just want it**'
+
+### Why you shouldn't really..
+
+- **Admin overhead** - managing EC2 and DBHost
+- **Backup** / DR Management
+- EC2 is **single AZ**
+- **Features** - some of AWS DB products are amazing
+- EC2 is **ON** or **OFF** - no serverless, no easy scaling
+- **Replication** - skills, setup time, monitoring & effectiveness
+- **Performance** .... AWS invest time into optimisation & features

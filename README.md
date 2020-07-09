@@ -477,3 +477,36 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 ### Links Placement Groups
 
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+
+### EC2 Dedicated Hosts
+
+- EC2 Host **dedicated to you**
+- Specific family e.g. a1, c5, m5
+- **No instance charges** ... you pay for the host
+- On-Demand & Reserved Options available
+- Host hardware has **physical sockets and cores**
+
+### Limitations & Features
+
+- **AMI Limits** - RHEL, SUSE Linux, and Windows AMIs aren't supported
+- **Amazon RDS** instances are not supported
+- **Placement groups** are not supported for Dedicated Hosts
+- Hosts can be shared with other ORG Accounts...**RAM product (Resource Access Manager)**
+
+### Enhanced Networking
+
+- Uses **SR-IOV** - NIC is virtualization aware
+- No charge - available on most EC2 Types
+- **Higher I/O** & **Lower Host CPU Usage**
+- More **Bandwidth**
+- Higher packets-per-second (**PPS**)
+- Consistent lower **latency**
+
+### EBS Optimized
+
+- **EBS** = Block storage over the **network**
+- Historically network was **shared** .. **data** and **EBS**
+- EBS Optimized means **dedicated capacity** for EBS
+- Most instances **support** and have **enabled by default**
+- Some support, but enabling costs extra
+

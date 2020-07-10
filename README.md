@@ -569,3 +569,20 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - EC2 is **ON** or **OFF** - no serverless, no easy scaling
 - **Replication** - skills, setup time, monitoring & effectiveness
 - **Performance** .... AWS invest time into optimisation & features
+
+### Relational Database Service RDS Architecture
+
+- Database-as-a-service (**DBaaS**)
+- .. **DatabaseServer**-as-a-service
+- **Managed Database** Instance (1+ Databases)
+- Multiple engines **MySQL**, **MariaDB**, **PostgreSQL**, **Oracle**, Microsoft **SQL Server**..
+- .. **Amazon Aurora**
+
+### RDS High-Availability (Multi AZ)
+
+- **No Free-tier** - Extra cost for standby replica
+- Standby **can't be directly used**
+- **60-120** seconds failover
+- **Same region only** (only AZs in the VPC)
+- Backups taken **from Standby** (removes performance impact)
+- AZ Outage, Primary Failure, Manual failover, Instance type change and software patching

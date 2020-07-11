@@ -586,3 +586,24 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Same region only** (only AZs in the VPC)
 - Backups taken **from Standby** (removes performance impact)
 - AZ Outage, Primary Failure, Manual failover, Instance type change and software patching
+
+### RPO: Recovery Point Objective
+
+- Time between last backup and the incident
+- Amount of maximum data loss
+- Influences technical solution & cost
+- Generally lower values cost more
+
+### RTO: Recovery Time Objective
+
+- Time between the DR event and full recovery
+- Influenced by process, staff, tech and documentation
+- Generally lower values cost more
+
+### RDS Restores
+
+- Creates a **NEW RDS Instance** - **new address**
+- Snapshots = **single point in time**, creation time 
+- Automated = **any 5 minute point in time**
+- Backup is restored and transactino logs are 'replayed' to bring DB to desired point in time
+- Restores **aren't fast** - Think about **RTO** Recovery Time Objective

@@ -699,3 +699,22 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Source** and **Destination Endpoints** point at ...
 - **Source** and **Target** Databases
 - **One endpoint MUST be on AWS**
+
+# Network Storage
+
+### Elastic File System EFS
+
+- **EFS** is an implementation of **NFSv4**
+- EFS **Filesystems** can be **mounted in Linux**
+- **Shared** between many EC2 Instances
+- Private service, via **mount targets** inside a VPC
+- Can be accessed from on-premises - **VPN** or **DX**
+
+### Elastic File System EFS
+
+- **Linux Only**
+- **General Purpose** and **Max I/O** Performance Modes
+- General Purpose = **default** for 99.9% of uses
+- **Bursting** and **Provisioned** Throughput Modes
+- **Standard** and **Infrequent Access** (IA) Classes
+- Lifecycle Policies can be used with classes

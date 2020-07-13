@@ -607,3 +607,69 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Automated = **any 5 minute point in time**
 - Backup is restored and transactino logs are 'replayed' to bring DB to desired point in time
 - Restores **aren't fast** - Think about **RTO** Recovery Time Objective
+
+### RDS Read-Replicas
+
+- **5x** direct read-replicas per DB instance
+- Each providing an **additional instance of read performance**
+- Read-Replicas can have read-replicas - **but lag starts to be a problem**
+- **Global** performance improvements
+
+### Availability Improvements
+
+- Snapshots & Backups Improve RPO
+- **RTO's are a problem**
+- RR's offer **nr. 0 RPO**
+- RR's can be **promoted quickly** - **low RTO**
+- **Failure only** - **until promoted**
+- **Global availability improvements ... global resilience**
+
+### Aurora Key Differences
+
+- Aurora architecture is **VERY** different from RDS...
+- ...Uses a "***Cluster***"
+- A single **primary** instance + **0** or more **replicas**
+- No local storage - uses **cluster volume**
+- Faster provisioning & improved availability & performance
+
+### Aurora Storage Architecture
+
+- All SSD Based - **high IOPS**, **low latency**
+- Storage is billed based on **what's used**
+- **High water mark** - billed for the most used
+- Storage which is freed up can be re-used
+- Replicas can be added and removed without requiring storage provisioning
+
+### Aurora Cost
+
+- **No free-tier option**
+- Aurora doesn't support Micro Instances
+- Beyond RDS singleAZ (micro) Aurora offers better value
+- Compute - hourly charge, per second, 10 minute minimum
+- Storage - GB-Month consumed, IO cost per request
+- 100% DB Size in backups are included
+
+### Aurora Restore, Clone & Backtrack
+
+- Backups in Aurora work in the same way as RDS
+- Restores create a **new cluster**
+- Backtrack can be used which allow **in-place rewinds** to a previous point in time
+- Fast clones make a new database MUCH faster than copying all the data - **copy-on-write**
+
+### Aurora Serverless Concepts
+
+- Scalable - **ACU** - Aurora Capacity Units
+- Aurora Serverless cluster has a **MIN & MAX ACU**
+- Cluster adjusts based on load
+- Can go to **0** and be **paused**
+- Consumption billing per-second basis
+- Same resilience as Aurora (6 copies across AZs)
+
+### Aurora Serverless - Use Cases
+
+- **Infrequently** used applications
+- **New** applications
+- **Variable** workloads
+- **Unpredictable** workloads
+- **Development** and **test** databases
+- **Multi-tenant** applications

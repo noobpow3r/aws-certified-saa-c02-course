@@ -673,3 +673,29 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Unpredictable** workloads
 - **Development** and **test** databases
 - **Multi-tenant** applications
+
+### Aurora Global Database
+
+- **Cross-Region Data Recovery and Business Content**
+- **Global Read Scaling - low latency performance improvements**
+- **~1s or less** replication between regions
+- **No impact** on DB performance
+- Secondary regions can have **16 replicas**
+- .. Can be promoted to R/W
+- Currently MAX 5 secondary regions...
+
+### Aurora Multi-Master
+
+- Default Aurora mode is **Single-Master**
+- **One R/W** and **0+ Read Only** Replicas
+- Cluster Endpoint is used to write, read endpoint is used for load balanced reads
+- Failover takes time - replica promoted to R/W
+- In Multi-Master mode **all instances are R/W**
+
+### Database Migration Service DMS
+
+- A managed database migration service
+- Runs using a **replication instance**
+- **Source** and **Destination Endpoints** point at ...
+- **Source** and **Target** Databases
+- **One endpoint MUST be on AWS**

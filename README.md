@@ -718,3 +718,66 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Bursting** and **Provisioned** Throughput Modes
 - **Standard** and **Infrequent Access** (IA) Classes
 - Lifecycle Policies can be used with classes
+
+# HA & Scaling
+
+### Load Balancing Fundamentals
+
+- Clients connect to the **Load Balancer**
+- ... specifically the **listener** of the LB
+- The LB connects on your behalf to 1+ targets (servers)
+- 2 connections .. **listener** & **backened**
+- Client **Abstracted** from individual servers
+- Used for **High-Availability**, **Fault-Tolerance** and **Scaling**
+
+### Application Load Balancer ALB
+
+- ALB is a '**layer-7**' LB - **understands HTTP/S**
+- Scalable and highly-available
+- Internet-Facing or Internal
+- **Listens** on the outside -> Sends to **Target(s) (Groups)
+- **Hourly** rate and **LCU** Rate (Capacity)
+
+### Exam Hints and Tips
+
+- **Targets** => **Target Groups** which are addressed via **rules**
+- Rules are **path based** or **host based**
+- Support EC2, ECS, EKS, Lambda, HTTPS, HTTP/2 and Websockets
+- ALB can use Server Name Indication **SNI** for **multiple SSL Certs** - **host based rules**
+- Recommended vs Classic Load Balancer CLB (Legacy)
+
+### Launch Configuration and Launch Templates
+
+- Allow you to define the configuration of an EC2 instance **in advance**
+- AMI, Instance Type, Storage & Key pair
+- Networking and Security Groups
+- Userdata & IAM Role
+- Both are NOT editable - defined once. Launch Templates has versions.
+- Launch Templates provide **newer feature** - including T2/t3 Unlimited, Placement Groups, Capacity Reservations, Elastic Graphics
+
+### Auto Scaling Groups
+
+- **Automatic Scaling** and **Self-Healing** for EC2
+- Uses **Launch Templates** or **Configurations**
+- Has a **Minimum**, **Desired** and **Maximum** Size (e.g 1:2:4)
+- **Provision** or **Terminate** Instances to keep at the **Desired** level (between Min/Max)
+- **Scaling Policies** automate based on metrics
+
+### Scaling Policies
+
+- **Manual** Scaling - Manually adjust the desired capacity
+- **Scheduled** Scaling - Time based adjustment - e.g. Sales..
+- **Dynamic** Scaling
+  - **Simple** - "CPU above 50% +1", "CPU Below 50 -1"
+  - **Stepped** Scaling - Bigger +/- based on difference
+  - **Taget tracking** - Desired Aggregate CPU = 40% .. ASG handle it
+- **Cooldown Periods** ...
+
+### Final Points
+
+- Autoscaling Groups are free
+- Only the resources created are billed ...
+- Use cool downs to avoid rapid scaling
+- Think about **more**, **smaller** instances - **granularity**
+- Use with Application Load Balancer (ALB's) for elasticity - **abstraction**
+- ASG defines **WHEN** and **WHERE**, Launch Templates defines **WHAT**

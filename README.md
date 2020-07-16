@@ -781,3 +781,19 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Think about **more**, **smaller** instances - **granularity**
 - Use with Application Load Balancer (ALB's) for elasticity - **abstraction**
 - ASG defines **WHEN** and **WHERE**, Launch Templates defines **WHAT**
+
+### Network Load Balancer NLB
+
+- NLB's are **Layer-4** .. only understand **TCP** and **UDP**
+- **Can't understand HTTP/S** but are faster - **~100ms** vs **400ms** for application load balancers
+- Rapid scaling - **millions of requests per second**
+- 1 Interface **w/ static IP per AZ**, can use **Elastic IPs** (**whitelisting**)
+- Can do **SSL Pass through** (see next lesson)
+- Can load balance **non HTTP/S applications** - doesn't care about anything above TCP/UDP
+
+### SSL Offload & Session Stickiness
+
+- Bridging
+- Pass-through
+- Offload
+

@@ -797,3 +797,107 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Pass-through
 - Offload
 
+# Serverless and Application Services
+
+### Event-Driven Architecture
+
+- **No constant running** or **waiting** for things
+- **Producers** generate events when something happens
+- .. clicks, errors, criteria met, uploads, actions
+- Events are delivered to **consumers**
+- .. **actions are taken** & the system returns to waiting
+- Mature event-driven architecture **only consumes resources while handling events** (serverless .... More on this soon)
+
+### Lambda Concepts
+
+- Function-as-a-Service (**FaaS**)
+- Event-driven **invocation** (execution)
+- **Lambda function** = piece of code in one language
+- Lambda functions use a **runtime** (e.g. Python 3.6)
+- Runs in a **runtime environment**
+- You are billed only for the duration a **function runs**...
+- Key component of **serverless** architecture ...
+
+### Key Considerations
+
+- Currently - 15 minute execution limit
+- New runtime environment every execution - **no persistence**
+- **Execution Role** provides permissions ..
+- Load data **from** other services (e.g. S3)
+- Store data **to** other services (e.g. S3)
+- (free tier) **1M free requests** per month and **400000 GB-seconds** of compute time per month
+
+### CloudWatchEvents and EventBridge Key Concepts
+
+- If **X** happens, or at **Y** time(s) ... do **Z**
+- EventBridge is ....... CloudWatch Events v2
+- A **default** Event bus for the account
+- .. In CloudWatch Events this is the only bus (**implicit**)
+- EventBridge can have additional event busses
+- Rules match incoming events ...(or schedules)
+- Route the events to **1+ Targets** .. e.g. Lambda
+
+### API Gateway
+
+- API Gateway is a **managed API Endpoint** Service
+- Create, Publish, Monitor and Secure APIs ... **as a service**
+- Billed based on Number of **API Calls**, **Data Transfer** and additional performance **features** such as caching
+- Can be used directly for serverless architecture
+- Or during a architecture **evolution** ...
+
+### What is Serverless
+
+- Serverless **isn't one single thing**
+- You manage **few**, **if any** servers - low overhead
+- Applications are a collection of small & specialised functions
+- .... **Stateless** and **Ephemeral** environments - duration billing
+- **Event-driven** .. consumption only when being used
+- **FaaS** is used where possible for compute functionality
+- **Managed services** are used where possible
+
+### Simple Notification Service (SNS)
+
+- **Public AWS Service** - network connectivity with Public Endpoint
+- Coordinates the sending and delivery of **messages**
+- Messages are <= **256KB** payloads
+- **SNS Topics** are the base entity of SNS - **permissions** and **configuration**
+- A **Publisher sends** messages to a **TOPIC**
+- **TOPICS** have **Subscribers** which **receive** messages
+- e.g. ... HTTP(s), Email(-JSON), SQS, Mobile Push, SMS Messages & Lambda
+- SNS used across AWS for notifications - e.g. CloudWatch & CloudFormation
+
+### Simple Notification Service (SNS)
+
+- Delivery **Status** - (including HTTP, Lambda, SQS)
+- Delivery **Retries** - Reliable Delivery
+- **HA** and **Scalable** (Region)
+- Server Side Encryption (**SSE**)
+- Cross-Account via **TOPIC Policy**
+
+### Step Functions: Some problems with Lambda
+
+- Lambda is **FaaS**
+- **15-minute max** execution time
+- Can be chained together
+- Gets messy at scale
+- Runtime Environments are **stateless**
+
+### Step Functions: State Machines
+
+- Serverless workflow .. **START** -> **STATES** -> **END**
+- States are **THINGS** which occur
+- Maximum Duration **1 year**..
+- **Standard** Workflow and **Express** Workflow
+- Started via API Gateway, IOT Rules, EventBridge, Lambda .....
+- Amazon States Language (**ASL**) - JSON Template
+- **IAM Role** is used for permissions
+
+### Step Functions: States
+
+- SUCCEED & FAIL
+- WAIT
+- CHOICE
+- PARALLEL
+- MAP
+- TASK (Lambda, Batch, DynamoDB, ECS, SNS, SQS, Glue, SageMaker, EMR, Step Functions)
+

@@ -964,3 +964,10 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Signed by a **trusted authority**
 - Create, renew and deploy certificates with ACM
 - Supported AWS Services **ONLY** (e.g. CloudFront and ALBs..**NOT EC2**)
+
+### Securing S3 using an Origin Access Identity (OAI)
+
+- Origin Access Identity is **associate** to CloudFront Distribution
+- Edge Locations via **OAI** Allowed
+- Direct access **Blocked** via Implicit **DENY**
+- Once **OAI** is associated with the distribution accesses are **FROM** the **OAI**

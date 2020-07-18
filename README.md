@@ -937,3 +937,30 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Kinesis designed for **huge scale ingestion** ..
 - ... and **multiple consumers** .. **rolling window**
 - Data **ingestion**, **Analytics**, **Monitoring**, **App Clicks**
+
+# Global Content Delivery And Optimization
+
+### CloudFront
+
+- CloudFront is a global object cache (**CDN**)
+- Content is **cached** in locations **close to customers**
+- **Lower latency** and **higher throughput**
+- **Load** on the content server is **decreased**
+- It can handle **static** and **dynamic** content
+
+### CloudFront Terms
+
+- **Origin** - The source location of your content
+- **Distribution** - The '**configuration**' unit of CloudFront
+- **Edge Location** - Local infraestructure which hosts a cache of your data
+- **Regional Edge Cache** - Larger version of an edge location. Provides another layer of caching
+
+### AWS Certificate Manager ACM
+
+- HTTP - Simple and Insecure
+- HTTP**S** - **SSL/TLS** Layer of Encryption added to HTTP
+- Data is encrypted **in-transit**
+- Certificates **prove identity**
+- Signed by a **trusted authority**
+- Create, renew and deploy certificates with ACM
+- Supported AWS Services **ONLY** (e.g. CloudFront and ALBs..**NOT EC2**)

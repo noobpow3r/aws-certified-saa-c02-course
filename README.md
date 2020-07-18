@@ -901,3 +901,39 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - MAP
 - TASK (Lambda, Batch, DynamoDB, ECS, SNS, SQS, Glue, SageMaker, EMR, Step Functions)
 
+### Simple Queue Service (SQS)
+
+- Public, Fully Managed, Highly-Available Queues - **Standard** or **FIFO**
+- Messages up to **256KB** in size - **link** to large data
+- Received messages are **hidden** (**VisibilityTimeout**)
+- .. then either reappear (retry) or are explicitly deleted
+- **Dead-Letter queues** can be used for problem messages
+- ASGs can scale and Lambdas invoke based on queue length
+
+### Simple Queue Service (SQS)
+
+- Standard = **at-least-once**, FIFO = **exactly-once**
+- FIFO (Performance) **3000 messages per second** with batching, or up to **300 messages per second without**
+- Billed based on 'requests'
+- 1 request = 1-10 messages up to 64KB total
+- **Short** (immediate) vs **Long** (**waitTimeSeconds**) Polling
+- Encryption at rest (**KMS**) & in-transit
+- Queue policy ...
+
+### Kinesis Concepts
+
+- Kinesis is a **scalable streaming** service
+- Producers **send** data into a kinesis **stream**
+- Streams can scale from low to near infinite data rates
+- Public service & highly available by design
+- Streams store a **24-hour** moving window of data
+- Multiple consumers access data from that moving window
+
+### SQS vs Kinesis
+
+- SQS **1** production group, **1** consumption group
+- SQS: **Decoupling** and **Asynchronous** communications
+- **No persistence** of messages, **no window**
+- Kinesis designed for **huge scale ingestion** ..
+- ... and **multiple consumers** .. **rolling window**
+- Data **ingestion**, **Analytics**, **Monitoring**, **App Clicks**

@@ -971,3 +971,26 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Edge Locations via **OAI** Allowed
 - Direct access **Blocked** via Implicit **DENY**
 - Once **OAI** is associated with the distribution accesses are **FROM** the **OAI**
+
+### Lambda@Edge
+
+- You can run **lightweight** Lambda at **edge locations**
+- **Adjust** data between the **Viewer** & **Origin**
+- Currently supports **Node.js** and **Python**
+- Run in the **AWS Public Space** (Not VPC)
+- **Layers** are **not supported**
+- **Different Limits** vs Normal Lambda Functions
+
+### Lambda@Edge Use Cases
+
+- A/B testing - **Viewer Request**
+- Migration Between S3 Origins - **Origin Request**
+- Different Objects Based on Device - **Origin Request**
+- Content By Country - **Origin Request**
+
+### Global Accelerator
+
+- Moves the **AWS network closer** to customers
+- Connections **enter at edge** .. using anycast IPs
+- **Transit over AWS backbone** to **1+** locations
+- Can be used for **NON HTTP/S** (**TCP**/**UDP**) - **Difference from CloudFront**

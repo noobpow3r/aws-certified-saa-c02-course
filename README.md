@@ -994,3 +994,56 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Connections **enter at edge** .. using anycast IPs
 - **Transit over AWS backbone** to **1+** locations
 - Can be used for **NON HTTP/S** (**TCP**/**UDP**) - **Difference from CloudFront**
+
+# Advanced VPC Networking
+
+### VPC Flow Logs
+
+- Capture **packet Metadata** .. **NOT** packet **contents**
+- Applied to a VPC - All interfaces in that VPC
+- Subnet - interfaces in that Subnet ..
+- Interface directly
+- VPC Flow Logs are NOT realtime
+- Destination can be S3 or CloudWatch Logs
+- ICMP=**1**, TCP=**6**, UDP=**17**
+- To and from **169.254.169.254**, **169.254.169.123**, **DHCP**, Amazon **DNS** Server & **Amazon Windows license** not recorded
+
+### Egress-Only Internet Gateway
+
+- With IPv4 addresses are **private** or **public**
+- **NAT** allows **private IPs** to access **public networks**
+- ... **without allowing** externally initiated connections (**IN**)
+- With **IPv6** all IPs are **public**
+- Internet Gateway (IPv6) allows all IPs **IN** and **OUT**
+- Egress-Only is **outbound-only** for **IPv6**
+- Egress-Only Gateway is **HA by default** across **all AZs** in the region - **scales as required**
+
+### VPC Endpoints (Gateway)
+
+- Provide **private access** to **S3** and **DynamoDB**
+- **Prefix List** added to **route table** => **Gateway Endpoint**
+- Highly Available (**HA**) across all AZs in a region by default
+- Endpoint policy is used to control what it can access
+- Regional ... **can't access cross-region** services
+- **Prevent Leaky Buckets** - S3 Buckets can be set to private only by allowing access ONLY from a gateway endpoint
+
+### VPC Endpoints (Interface Endpoints)
+
+- Provide **private access** to AWS Public Services
+- .... anything **NOT S3** and **DynamoDB**
+- Added to **specific subnets** - an **ENI** - **not HA**
+- For HA .. add **one endpoint**, to **one subnet**, **per AZ** used in the VPC
+- Network access controlled via **Security Groups**
+- **Endpoint Policies** - restrict what can be done with the endpoint
+- **TCP** and **IPv4** ONLY
+- Uses **PrivateLink**
+
+### VPC Endpoints (Interface Endpoints)
+
+- Endpoint provides a NEW service endpoint DNS
+- e.g. **vpce-123-xyz.sns.us-east-1.vpce.amazonaws.com**
+- Endpoint **Regional DNS**
+- Endpoint **Zonal DNS**
+- Applications can optionally use these, or ...
+- **PrivateDNS overrides** the **default DNS** for services
+

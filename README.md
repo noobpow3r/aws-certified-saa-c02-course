@@ -1055,3 +1055,71 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Same region SG's** can reference **peer SGs**
 - VPC Peering does **NOT** support **transitive peering**
 - **Routing** Configuration is needed, **SGs** & **NACLs** can filter
+
+# Hybrid Environments And Migration
+
+### Borger Gateway Protocol (BGP) 101
+
+- Autonomous System (**AS**) - Routers controlled by one entity ... a network in BGP
+- **ASN** are unique and allocated by IANA (**0-65535**), **64512** - **65534** are private
+- BGP Operates over **tcp/179** - it's **reliable**
+- **Not automatic** - peering is **manually configured**
+- BGP is a **path-vector** protocol it exchanges the **best path** to a **destination** between **peers** ... the path is called the **ASPATH**
+- **iBGP** = Internal BGP - Routing **within** an AS
+- **eBGP** = External BGP - Rounting **between** AS's
+
+### AWS Site-to-Site VPN
+
+- AWS Site-to-Site VPN is a hardware VPN solution which creates a highly available IPSEC VPN between an AWS VPN and external network such as on-premises traditional networks. VPNs are quick to setup vs direct connect, don't offer the same high performance, but do encrypt data in transit. This lesson details the architecture and key concepts you need to be aware of for the exam
+- A logical connection between a VPC and on-premises network encrypted using IPSec, running over the **public internet**
+- Full High Availability HA - if you design and implement it correctly
+- Quick to provision ... **less than an hour**
+- Virtual Private Gateway (**VGW**)
+- Customer Gateway (**CGW**)
+- VPN Connection between the **VGW** and **CGW**
+
+### VPN Considerations
+
+- Speed Limitations ~ **1.25Gbps**
+- Latency Considerations - **inconsistent**, **public internet**
+- Cost - AWS hourly cost, GB out cost, data cap (on premises)
+- Speed of setup - **hours** .. all **software** configuration
+- Can be used as a backup for Direct Connect (**DX**)
+- Can be used with Direct Connect (**DX**)
+
+### AWS Direct Connect (**DX**)
+
+- A **1 Gbps** or **10 Gbps** Network Port **into AWS**
+- .. at a **DX Location** (**1000-Base-LX** or **10GBASE-LR**)
+- .. to your **Customer Router** (requires **VLANS**/**BGP**)
+- .. or **Partner Router** (if **extending** to your location)
+- Multiple Virtual Interfaces (**VIFS**) over one DX
+- **Private** VIF (VPC) & **Public** VIF (Public Zone Services)
+
+### (DX) Considerations
+
+- Takes **MUCH** longer to provision vs **VPN**
+- DX Port provisioning is quick ... the cross-connect takes longer
+- .. extension to premises can take **weeks/months**
+- Use **VPN first** .. then **replace with DX** (Or leave as **backup**)
+- Faster .. 40Gbps with Aggregation
+- Low consistent latency, doesn't use business bandwidth
+- **NO ENCRYPTION**
+
+### AWS Transit Gateway (**TGW**)
+
+- The AWS Transit gateway is a network gateway which can be used to significantly simplify networking between VPC's, VPN and Direct Connect
+- It can be used to peer VPCs in the same account, different account, same or different region and supports transitive routing between networks
+- **Network Transit Hub** to connect VPCs to on premises networks
+- Significantly **reduces** network complexity
+- Single network object - HA and Scalable
+- **Attachments** to other networks types
+- **VPC**, **Site-to-Site VPN** & **Direct Connect Gateway**
+
+### Transit Gateway Considerations
+
+- Supports **transitive routing**
+- Can be used to create global networks
+- Share **between accounts** using **AWS Resource Access Manager**
+- Peer with **different regions** ... same or cross account
+- **Less complexity** vs **w**/**o** Transit Gateway

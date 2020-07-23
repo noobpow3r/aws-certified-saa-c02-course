@@ -1047,3 +1047,11 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Applications can optionally use these, or ...
 - **PrivateDNS overrides** the **default DNS** for services
 
+### VPC Peering
+
+- Direct encrypted network link between **two VPCs**
+- Works **same**/**cross-region** and **same**/**cross-account**
+- (**optional**) **Public Hostnames** resolve to **private IPs**
+- **Same region SG's** can reference **peer SGs**
+- VPC Peering does **NOT** support **transitive peering**
+- **Routing** Configuration is needed, **SGs** & **NACLs** can filter

@@ -1123,3 +1123,156 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Share **between accounts** using **AWS Resource Access Manager**
 - Peer with **different regions** ... same or cross account
 - **Less complexity** vs **w**/**o** Transit Gateway
+
+### Storage Gateway
+
+- Hybrid Storage Virtual Appliance (**On-premise**)
+- It's capable of running in 3 modes: FILE, TAPE and VOLUME (Stored or Cached)
+- **Extension** of **File** & **Volume** Storage into AWS
+- **Volume** storage **backups into** AWS
+- **Tape** Backups **into** AWS
+- **Migration** of existing infrastructure to AWS
+
+### Storage Gateway
+
+- Tape Gateway (**VTL**) Mode
+  - Virtual tapes => S3 and Glacier 
+- **File** Mode - SMB and NFS
+  - File Storage backed by S3 Objects
+- **Volume** Mode (Gateway **Cache**/**Stored**) - iSCSI
+  - Block storage backed by S3 and EBS Snapshots
+
+### Snowball / Snowball Edge / Snowmobile : Key Concepts
+
+- Snowball, Snowball Edge and Snowmobile are three parts of the same product family designed to allow the physical transfer of data between business locations and AWS
+- Move large amounts of data **IN** and **OUT** of AWS
+- Physical storage .. **suitcase** or **truck**
+- Ordered from AWS **Empty**, **Load up**, **Return**
+- Ordered from AWS **with data**, **empty** & **Return**
+- For the exam know which to use ..
+
+### Snowball
+
+- Ordered from AWS, Log a Job, Device Delivered (not instant)
+- Data Encryption uses KMS
+- **50TB** or **80TB** Capacity
+- 1 Gbps (RJ45 1 GBase-TX) or 10 Gbps (LR/SR) Network
+- **10 TB** to **10 PB** economical range (**multiple devices**)
+- Multiple devices to **multiple premises** ..
+- Only storage
+
+### Snowball Edge
+
+- Both **Storage** and **Compute**
+- **Larger capacity** vs Snowball
+- **10** Gbps (RJ45), **10/25** (SFP), **45/50/100** Gbps (QSFP+)
+- **Storage Optimized** (**with EC2**) - 80TB, 24 vCPU, 32 Gib RAM, **1 TB SSD**
+- **Compute Optimized** - 100TB + 7.68G NVME, 52 vCPU and 208 GiB RAM
+- **Compute with GPU** - As Above .. **with a GPU**
+- Ideal for remote sites or where data processing on ingestion is needed
+
+### Snowmobile
+
+- Portable DC within a shipping container on a **truck**
+- Special order
+- Ideal for single location when **10 PB+** is required
+- Up to **100PB** per snowmobile
+- Not economical for **multi-site** (**unless huge**) or **sub 10PB**
+
+### Directory Service : What's a Directory?
+
+- Stores **objects** (e.g. Users, Groups, Computers, Servers, File Shares) with a **structure** (domain/tree)
+- Multiple trees can be grouped into a **forest**
+- Commonly used in **Windows Environments**..
+- Sign-in to multiple devices with the same username/password provides centralised management for assets
+- ... Microsoft Active Directory Domain Services (**AD DS**)
+- AD DS most popular, open-source alternatives (**SAMBA**)
+
+### What about Directory Service?
+
+- **AWS Managed** implementation
+- Runs within a **VPC** ..
+- To implement **HA** ... deploy into **multiple AZs**
+- Some AWS services **NEED** a directory e.g. **Amazon Workspaces**
+- Can be **isolated..**
+- .. or **integrated** with existing **on-premises system**
+- Or act as a '**proxy**' back to on-premises
+
+### Picking between Modes..
+
+- **Simple AD** - The default. Simple requirements. A directory in AWS.
+- **Microsoft AD** - Applications in AWS which need **MS AD DS**, or you need to **TRUST AD DS**
+- **AD Connector** - use AWS Services which need a directory **without storing any directory info in the cloud** ...  proxy to your on-premises Directory
+
+### AWS DataSync
+
+- AWS DataSync is a product which can orchestrate the movement of large scale data (amounts or files) from on-premises NAS/NAS into AWS or vice-versa
+- Data Transfer service **TO** and **FROM** AWS
+- **Migrations**, **Data Processing Transfers**, **Archival**/**Cost Effective Storage** or **DR**/**BC**
+- .. designed to work at **huge scale**
+- Keeps **metadata** (e.g. **permissions**/**timestamps**)
+- Built in **data validation**
+
+### AWS DataSync : Key Features
+
+- **Scalable** - 10Gbps per agent (~100TB per day)
+- **Bandwidth Limiters** (avoid link saturation)
+- **Incremental** and **scheduled** transfer options
+- **Compression** and **encryption**
+- **Automatic recovery** from transit errors
+- AWS **Service integration** - S3, EFS, FSx
+- Pay as you use ... per GB cost for data moved
+
+### DataSync Components
+
+- **Task** - A 'job' within DataSync, defines what is being synced, how quickly, FROM where and TO where
+- **Agent** - Software used to **read** or **write** to on-premises data stores using **NFS** or **SMB**
+- **Location** - every task has two locations FROM and TO. E.g. Network File System (**NFS**), Server Message Block (**SMB**), Amazon **EFS**, Amazon **FSx** and Amazon **S3**
+
+### FSx for Windows File Server
+
+- Fully managed **native windows** file servers/shares
+- Designed for **integration** with **windows environments**
+- Integrates with **Directory Service** or **Self-Managed AD**
+- **Single** or **Multi-AZ** within a VPC
+- **On-demand** and **Scheduled** Backups
+- Accessible using **VPC**, **Peering**, **VPN**, **Direct Connect**
+
+### FSx Key Features and Benefits
+
+- **VSS** - User-Driven Restores
+- Native file system accessible over **SMB**
+- **Windows permission model**
+- Supports **DFS** .. scale-out file share structure
+- Managed - no file server admin
+- Integrates with **DS** AND **your own** directory
+
+### FSx for Lustre
+
+- Managed **Lustre** - Designed for **HPC** - **LINUX** Clients (**POSIX**)
+- **Machine Learning**, **Big Data**, **Financial Modelling**
+- **100's GB/s** throughput & **sub millisecond** latency
+- Deployment types - **Pesistent** or **Scratch**
+- Scratch - Highly optimised for **Short term** no replication & fast
+- Persistent - **longer term**, **HA** (**in one AZ**), **self-healing**
+- Accessible over **VPN** or **Direct Connect**
+
+### FSx for Lustre
+
+- Metadata stored on Metadata Targets (**MST**)
+- Objects are stored on called object storage targets (**OSTs**) (**1.17TiB**)
+- **Baseline** performance based on **size**
+- Size - min **1.2TiB** then increments of **2.4TiB**
+- For **Scratch** - Base **200 MB/s** per **TiB** of storage
+- Persistent offers **50MB/s**, **100 MB/s** and **200 MB/s** per **TiB** of storage
+- Burst up to **1,300 MB/s** per TiB (Credit System)
+
+### FSx for Lustre
+
+- Scratch is designed for **pure performance**
+- **Short term** or **term** workloads
+- **NO HA** .. **NO REPLICATION**
+- **Larger file systems** means **more servers**, **more disks** and **more chance of failure !!**
+- Persistent has **replication** within **ONE AZ** only
+- **Auto-heals** when hardware failure occurs
+- You can **backup to S3** with **both** !! (Manual or Automatic 0-35 day retention)

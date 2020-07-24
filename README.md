@@ -1276,3 +1276,48 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Persistent has **replication** within **ONE AZ** only
 - **Auto-heals** when hardware failure occurs
 - You can **backup to S3** with **both** !! (Manual or Automatic 0-35 day retention)
+
+# Security, Deployment & Operations
+
+### AWS Secrets Manager
+
+- AWS Secrets manager is a product which can manage secrets within AWS. There is some overlap between it and the SSM Parameter Store - but Secrets manager is specialised for secrets
+- Additionally Secrets managed is capable of automatic credential rotation using Lambda
+- It **does share functionality** with Parameter Store
+- Designed for **secrets** (.. passwords, API KEYS..)
+- Usable via **Console**, **CLI**, **API** or **SDK's** (integration)
+- Supports **automatic rotation** ... this uses **lambda**
+- Directly **integrates** with some AWS products (..**RDS**)
+
+### AWS Shield
+
+- Provides AWS resources with **DDoS protection**
+- Shield Standard - **free** with **Route53** and **CloudFront**
+- Protection against **Layer 3** and **Layer 4 DDoS** Attacks
+- Shield **Advanced** - **$3000 per/month**
+- **EC2**, **ELB**, **CloudFront**, **Global Accelerator** & **R53**
+- **DDoS Response Team** & **Financial Insurance**
+
+### Web Application Firewall WAF
+
+- **Layer 7** (HTTP/s) Firewall
+- Protects against complex Layer 7 attacks/exploits
+- **SQL Injections**, **Cross-Site Scripting**, Geo Blocks, Rate Awareness
+- Web Access Control List (**WEBACL**) integrated with **ALB**, **API Gateway** and **CloudFront**
+- **Rules** are added to a **WEBACL** and **evaluated** when traffic **arrives**
+
+### CloudHSM
+
+- With KMS .. AWS Manage .. Shared but separated
+- True "Single Tenant" Hardware Security Module (**HSM**)
+- **AWS provisioned** ... **fully customer managed**
+- Fully **FIPS 140-2 Level 3** (KMS is **L2** Overall, **some L3**)
+- Industry Standard APIs - **PKCS#11**, Java Cryptography Extensions (**JCE**), Microsoft **CryptoNG** (CNG) libraries
+- KMS can use **CloudHSM** as a **custom key store**, CloudHSM integration with KMS
+
+### CloudHSM Use Cases
+
+- No Native AWS integration .. e.g. no S3 SSE
+- Offload the SSL/TLS Processing for Web Servers
+- Enable Transparent Data Encryption (TDE) for Oracle Databases
+- Protect the Private Keys for an Issuing Certificate Authority (CA)

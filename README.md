@@ -1321,3 +1321,48 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Offload the SSL/TLS Processing for Web Servers
 - Enable Transparent Data Encryption (TDE) for Oracle Databases
 - Protect the Private Keys for an Issuing Certificate Authority (CA)
+
+# NOSQL Databases & DynamoDB
+
+### DynamoDB Concepts
+
+- DynamoDB is a NoSQL fully managed Database-as-a-Service (DBaaS) product available within AWS
+- NoSQL **Public** Database-as-a-Service (**DBaaS**) - **Key**/**Value** & **Document**
+- **No self-managed servers** or infrastructure
+- **Manual** / **Automatic** provisioned performance IN/OUT or **On-Demand**
+- Highly Resilient ... across **AZs** and optionally **global**
+- **Really fast** .. **single-digit milliseconds** (SSD based)
+- Backups, point-in-time recovery, encryption at rest
+- Event-Driven integration ... do things when data changes
+
+### DynamoDB Considerations
+
+- NoSQL ... **preference** DynamoDB in the exam
+- Relational Data ... generally **NOT** DynamoDB
+- Key/Value .. **preference** DynamoDB in the exam
+- Access via console, CLI, API .. '**NO SQL**'
+- Billed based **RCU**, **WCU**, **Storage** and **features**
+
+### DynamoDB - Operations, Consistency and Performance: Reading and Writing
+
+- **On-Demand** - unknown, unpredictable, Iow admin
+- On-Demand - price **per million** R or W units
+- **Provisioned** ... **RCU** and **WCU** set on a per table basis
+- Every operation consumes at least **1 RCU**/**WCU**
+- 1 RCU is **1 x 4KB** read operation per second 
+- 1 WCU is **1 x 1KB** write operation per second
+- Every table has a RCU and WCU burst pool (**500 seconds**)
+
+### WCU Calculation
+
+- If you need to store **10** ITEMS per second ... 2.5K average size per ITEM
+- Calculate **WCU per item** ... **ROUND UP** (**ITEM SIZE** / **1 KB**) (**3**)
+- **Multiply** by average **number per second** (**30**)
+
+### RCU Calculation
+
+- If you need to retrieve **10** ITEMS per second ... **2.5K** average size
+- Calculate **RCU per item** ... **ROUND UP** (**ITEM SIZE** / **4 KB**) (**1**)
+- **Multiply** by average read ops **per second** (**10**)
+= Strongly Consistent **RCU Required** (**10**)
+- (50% of strongly consistent) = Eventually Consistent RCU Required (**5**)

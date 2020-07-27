@@ -1366,3 +1366,111 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Multiply** by average read ops **per second** (**10**)
 = Strongly Consistent **RCU Required** (**10**)
 - (50% of strongly consistent) = Eventually Consistent RCU Required (**5**)
+
+### DynamoDB Streams: Concepts
+
+- Time ordered list of **ITEM CHANGES** in a table
+- **24-Hour** rolling window
+- Enabled on a **per table** basis
+- Records **INSERTS**, **UPDATES** and **DELETES**
+- Different **view types** influence what is in the stream
+
+### DynamoDB: Trigger Concepts
+
+- ITEM **changes** generate an **event**
+- That event **contains the data** which changed
+- A **action is taken** using that data
+- AWS = **Streams + Lambda**
+- **Reporting** & **Analytics**
+- **Aggregation**, **Messaging** or **Notifications**
+
+### DynamoDB Indexes: Local and Global Secondary
+
+- Query is the most efficient operation in DDB
+- Query can only work on 1 PK value at a time..
+- .. and optionally a single, or range of SK values
+- Indexes are **alternative views** on table data
+- Different **SK** (**LSI**) or Different **PK and SK** (**GSI**)
+- **Some** or **all attributes** (**projection**)
+
+### Local Secondary Indexes (LSI)
+
+- LSI is an alternative view for a table
+- **MUST** be created with a table
+- **5 LSI's** per base table
+- Alternative **SK** on the table
+- **Shares** the **RCU** and **WCU** with the **table**
+- Attributes - ALL, KEYS_ONLY & INCLUDE
+
+### Global Secondary Indexes (GSI)
+
+- Can be created **at any time**
+- Default limit of **20 per base table**
+- Alternative **PK** and **SK**
+- GSI's have their **own RCU** and **WCU** allocations
+- Attributes - ALL, KEYS_ONLY & INCLUDE
+
+### LSI and GSI Considerations
+
+- Careful with projection (KEYS_ONLY, INCLUDE, ALL)
+- Queries on attributes NOT projected are expensive
+- Use **GSIs as default**, LSI only when **strong consistency** is required
+- Use indexes for **alternative access patterns**
+
+### DynamoDB - Global Tables
+
+- DynamoDB Global Tables provides multi-master global replication of DynamoDB tables which can be used for performance, HA or DR/BC reasons
+- Global tables provides **multi-master cross-region** replication
+- Tables are created in multiple regions and added to the same global table (becoming replica tables)
+- **Last writer wins** is used for conflict resolution
+- **Reads** and **Writes** can occur to **any region**
+- Generally **sub-second** replication between regions
+- Strongly consistent reads **ONLY** in the same region as writes
+- **Global eventual consistency** same-region **eventual** or **strongly** consistent
+- **Multi-master replication**, all tables can be used for **Read** and **Write** operations
+- Provides **Global HA** and **Global DR/BC**
+
+### DynamoDB - Accelerator DAX
+
+- DynamoDB Accelerator (DAX) is an in-memory cache designed specifically for DynamoDB. It should be your default choice for any DynamoDB caching related questions
+- **Primary** NODE (**Writes**) and **Replicas** (**Read**)
+- Nodes are **HA** .. Primary failure = election
+- In-Memory cache - Scaling .. **Much faster reads, reduced costs**
+- Scale **UP** and Scale **OUT** (**Bigger** or **More**)
+- Supports **write-through**
+- DAX Deployed **WITHIN a VPC**
+
+### Amazon Athena
+
+- Serverless Interactive Querying Service
+- Ad-hoc queries on data - pay only **data consumed**
+- **Schema-on-read** - table-like translation
+- Original data **never changed** - **remains on S3**
+- Schema translates data => relational-like when read
+- Output can be sent to other services
+- Supports standard formats of **structured**, **semi-structured** and **unstructured** data. Source data is stored on **S3**
+- Athena can directly read many AWS data formats such as **CloudTrail**, **ELB Logs** and **Flow Logs**
+- "**Tables**" are defined in advance in a data catalog and **data is projected through** when **read**. It allows **SQL-like** queries on data without **transforming** source data
+- Output can be sent to visualisation tools
+- Billed based on **data consumed** during query
+
+### ElastiCache
+
+- Elasticache is a managed in-memory cache which provides a managed implementation of the redis or memcached engines
+- Its useful for read heavy workloads, scaling reads in a cost effective way and allowing for externally hosted user session state
+- In-memory database .. **high performance**
+- Managed **Redis** or **Memcached** .. as a service
+- Can be used to **cache data** - for **READ HEAVY** workloads with **low latency** requirements
+- **Reduces database** workloads (**expensive**)
+- Can be used to store **Session Data** (**Stateless** Servers)
+- **Requires application code changes !!**
+
+### ElastiCache - Reddis vs MemcacheD
+
+| Memcached | Redis |
+| --------- | ----- |
+| Simple data structures | Advanced Structures |
+| No Replication | Multi-AZ |
+| Multiple Nodes (Sharding) | Replication (Scale Reads) |
+| No backups | Backup & Restore |
+| Multi-threaded | Transactions |

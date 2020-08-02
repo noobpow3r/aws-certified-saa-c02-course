@@ -770,7 +770,7 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - **Dynamic** Scaling
   - **Simple** - "CPU above 50% +1", "CPU Below 50 -1"
   - **Stepped** Scaling - Bigger +/- based on difference
-  - **Taget tracking** - Desired Aggregate CPU = 40% .. ASG handle it
+  - **Target tracking** - Desired Aggregate CPU = 40% .. ASG handle it
 - **Cooldown Periods** ...
 
 ### Final Points

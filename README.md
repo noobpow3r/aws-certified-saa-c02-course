@@ -804,6 +804,14 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Can do **SSL Pass through** (see next lesson)
 - Can load balance **non HTTP/S applications** - doesn't care about anything above TCP/UDP
 
+### ALB vs NLB
+- Unbroken encryption ... use NLB
+- Static IP for whitelisting ... use NLB
+- The fastest performance ... use NLB (millions rps)
+- Protocols not HTTP or HTTPS ... use NLB
+- Privatelink ... use NLB
+- Otherwise ... use ALB
+
 ### SSL Offload & Session Stickiness
 
 - Bridging

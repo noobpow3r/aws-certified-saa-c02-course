@@ -8,6 +8,13 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
   * [VPC Considerations](#vpc-considerations)
   * [VPC Sizing](#vpc-sizing)
   * [Custom VPC](#custom-vpc)
+  * [DNS in a VPC](#dns-in-a-vpc)
+  * [VPC Subnets](#vpc-subnets)
+  * [Subnet IP Addressing](#subnet-ip-addressing)
+  * [VPC Router](#vpc-router)
+  * [Internet Gateway IGW](#internet-gateway-igw)
+  * [Using an IGW](#using-an-igw)
+
 
 # Virtual Private Cloud Basics
 
@@ -84,7 +91,7 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 - Controlled by **route tables** each subnet has one
 - A VPC has a **Main** route table - subnet default
 
-### Internet Gateway (IGW)
+### Internet Gateway IGW
 
 - **Region resilient** gateway attached to a VPC
 - 1 VPC = 0 or 1 IGW, 1 IGW = 0 or 1 VPC
@@ -101,7 +108,7 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 5. Default Routes => IGW
 6. Subnet allocate IPv4
 
-### Bastion Host / Jumpbox
+### Bastion Host or Jumpbox
 
 - Bastion Host = Jumpbox
 - An instance in a public subnet
@@ -734,7 +741,13 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 
 - ALB is a '**layer-7**' LB - **understands HTTP/S**
 - Scalable and highly-available
-- Internet-Facing or Internal
+- Elastic Load Balancer is a **DNS A** Record pointing at **1+** Nodes per Availability Zone (AZ)
+- Nodes (in one subnet per AZ) can scale
+- **Internet-Facing** means nodes have **public IPv4 IPs**
+- **Internal** is **private only IPs**
+- EC2 **doesn't need to be public** to work with LB
+- **Listener** Configuration controls **WHAT** the LB does
+- **8+** Free IPs per subnet, and **/27** subnet to allow scaling
 - **Listens** on the outside -> Sends to **Target(s) (Groups)
 - **Hourly** rate and **LCU** Rate (Capacity)
 

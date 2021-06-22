@@ -963,11 +963,22 @@ Notes for Adrian Cantrill course https://learn.cantrill.io/
 
 ### CloudFront
 
-- CloudFront is a global object cache (**CDN**)
-- Content is **cached** in locations **close to customers**
-- **Lower latency** and **higher throughput**
-- **Load** on the content server is **decreased**
-- It can handle **static** and **dynamic** content
+* CloudFront is a global object cache (**CDN**)
+* S3 origin and Custom origin
+* Content is **cached** in locations **close to customers**
+* **Lower latency** and **higher throughput**
+* **Load** on the content server is **decreased**
+* It can handle **static** and **dynamic** content
+
+### CloudFront Check level
+
+1. User request
+2. Check Edge
+3. Checks Regional Edge
+4. Origin Fetch (S3 Origin or Custom origin)
+5. Return to Regional Edge
+6. Return to Edge
+7. Return to User
 
 ### CloudFront Terms
 
